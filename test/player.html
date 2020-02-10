@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+      <script type="text/javascript">
+        var id = Math.ceil(Math.random() * 100);
+        var ws = new WebSocket("ws://localhost:12321/qmpOM2xAJ6/" + id);
+        function WebSocketTest()
+        {
+          if ("WebSocket" in window)
+          {
+             // Let us open a web socket
+
+
+             ws.onopen = function()
+             {
+                // Web Socket is connected, send data using send()
+                // ws.send("connection..,");
+             };
+
+             ws.onmessage = function (evt)
+             {
+                var received_msg = evt.data;
+                console.log(received_msg);
+             };
+
+             ws.onclose = function()
+             {
+                // websocket is closed.
+                alert("Connection is closed...");
+             };
+          }
+          else
+          {
+             // The browser doesn't support WebSocket
+             alert("WebSocket NOT supported by your Browser!");
+          }
+          }
+          WebSocketTest();
+
+          function sendMessage(data) {
+          var inp = document.getElementById("card").value;
+          if (inp.trim() == "") {
+           alert("No card entered");
+          } else {
+           ws.send(inp);
+          }
+        }
+      </script>
+   </head>
+   <body>
+
+   </body>
+</html>

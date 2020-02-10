@@ -1,0 +1,30 @@
+{
+  "name": "game-details-server",
+  "version": "1.0.0",
+  "description": "Server to broadcast game details",
+  "main": "app.js",
+  "scripts": {
+    "baccarat": "set GAME=bacca&&set node_env=development&&node app.js",
+    "dragontiger": "set GAME=dragontiger&&set node_env=development&&node app.js",
+    "moneywheel": "set GAME=moneywheel&&set node_env=development&&node app.js",
+    "baccarat-local": "set GAME=bacca&&set node_env=local&&node app.js",
+    "dragontiger-local": "set GAME=dragontiger&&set node_env=local&&node app.js",
+    "moneywheel-local": "set GAME=moneywheel&&set node_env=local&&node app.js",
+    "run-all-local": "npm-run-all --parallel baccarat-local dragontiger-local moneywheel-local",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.5.0",
+    "console-stamp": "^0.2.5",
+    "lodash": "^4.17.4",
+    "memori": "^1.1.0",
+    "moment": "^2.18.1",
+    "npm-run-all": "^4.1.5",
+    "request": "^2.87.0",
+    "sails-mysql": "^0.11.5",
+    "waterline": "^0.11.11",
+    "ws": "^3.0.0"
+  }
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+      <script type="text/javascript">
+        var id = Math.ceil(Math.random() * 10);
+        var ws = new WebSocket("ws://localhost:12321/2CAXryXglM/C8/" + id);
+        function WebSocketTest()
+        {
+          if ("WebSocket" in window)
+          {
+             // Let us open a web socket
+
+
+             ws.onopen = function()
+             {
+                // Web Socket is connected, send data using send()
+                // ws.send("connection..,");
+             };
+
+             ws.onmessage = function (evt)
+             {
+                var received_msg = evt.data;
+                console.log(received_msg);
+             };
+
+             ws.onclose = function()
+             {
+                // websocket is closed.
+                alert("Connection is closed...");
+             };
+          }
+          else
+          {
+             // The browser doesn't support WebSocket
+             alert("WebSocket NOT supported by your Browser!");
+          }
+          }
+          WebSocketTest();
+
+          function sendMessage() {
+            // if (document.getElementById("card1").value == "" ||
+            //     document.getElementById("card2").value == "" ||
+            //     document.getElementById("card4").value == "" ||
+            //     document.getElementById("card5").value == "" ) {
+            //   alert("card1, card2, card4, card5 must not be blank");
+            //   return;
+            // }
+
+            var data = {
+              action: "process",
+              cards:{
+                player: {
+                  card1: document.getElementById("card1").value,
+                  card2: document.getElementById("card2").value,
+                  card3: document.getElementById("card3").value,
+                },
+                banker: {
+                  card1: document.getElementById("card4").value,
+                  card2: document.getElementById("card5").value,
+                  card3: document.getElementById("card6").value,
+                }
+              }
+            }
+            ws.send(JSON.stringify(data));
+          }
+
+          function sendTime() {
+            var inp = document.getElementById("timer").value || 10;
+            var timer = setInterval(function(){ if (inp == 0) clearInterval(timer);ws.send(JSON.stringify({action: "timer", countDown: inp})); inp--; }, 1000);
+          }
+
+          function sendStatus() {
+            var inp = document.getElementById("status").value;
+            ws.send(JSON.stringify({action: "status", status: inp}));
+          }
+
+          function sendDealer() {
+            var inp = document.getElementById("dname").value;
+            ws.send(JSON.stringify({action: "dealer", dealer: {name: inp}}));
+          }
+      </script>
+   </head>
+   <body>
+     <center>
+     <br><br><br>
+     Send card<br> <input type="text" id="card1" placeholder="player 1st"/> <input type="text" id="card2" placeholder="player 2nd"/> <input type="text" id="card3" placeholder="player 3rd"/>
+     <br><input type="text" id="card4" placeholder="banker 1st"/> <input type="text" id="card5" placeholder="banker 2nd"/> <input type="text" id="card6" placeholder="banker 3rd"/>
+     <br><button onclick="sendMessage();">Send</button><br><br><br>
+     Start timer <br> <input type="number" id="timer"/><br> <button onclick="sendTime();">Send</button><br><br><br>
+     Update status  <br><input type="text" id="status"/><br> <button onclick="sendStatus();">Send</button><br><br><br>
+     Dealer Name <br><input type="text" id="dname"/><br> <button onclick="sendDealer();">Send</button><br><br><br>
+
+    </center>
+  </body>
+</html>
