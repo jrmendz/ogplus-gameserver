@@ -16,7 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async": "^2.5.0",
+    "async": "^2.6.4",
     "console-stamp": "^0.2.5",
     "lodash": "^4.17.4",
     "memori": "^1.1.0",
